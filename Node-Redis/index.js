@@ -1,17 +1,20 @@
-const express = require("express");
+const express = require('express');
 const redis = require("redis");
 
 const app = express();
-const redisClient = redis.createClient();
-const NumberOfVisits = "numberOfVisits";
+const redisClient = redis.createClient({
+    host: "redis-server",
+    port: 6379
+});
+const numberOfVisits = "numberOfVisits";
 
-redisClient.set(NumberOfVisits, 0);
+redisClient.set(numberOfVisits, 0);
 
 app.get('/', (req, res) => {
-    redisClient.get(NumberOfVisits, (x) => {
+    redisClient.get(numberOfVisits, (err, x) => {
         res.send("Number of visits is " + x);
-        redisClient.set(NumberOfVisits, parseInt(++x));
+        redisClient.set(numberOfVisits, parseInt(x) + 1);
     });
 });
 
-app.listen(8081, () => console.log("Listening on port 8081"));
+app.listen(8081, () => console.log("Listening on port 4001"));
