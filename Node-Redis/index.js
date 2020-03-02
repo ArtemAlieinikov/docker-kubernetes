@@ -11,9 +11,9 @@ const numberOfVisits = "numberOfVisits";
 redisClient.set(numberOfVisits, 0);
 
 app.get('/', (req, res) => {
-    redisClient.get(numberOfVisits, (err, x) => {
-        res.send("Number of visits is " + x);
-        redisClient.set(numberOfVisits, parseInt(x) + 1);
+    redisClient.get(numberOfVisits, (err, visits) => {
+        res.send("Number of visits is " + visits);
+        redisClient.set(numberOfVisits, parseInt(visits) + 1);
     });
 });
 
