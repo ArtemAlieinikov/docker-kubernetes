@@ -5,7 +5,7 @@ services:
   - docker
 
 before_install:
-  - ./frontend-react-app docker -t artemalieinikov/frontend-react-app -f Dockerfile.dev .
+  - docker -t artemalieinikov/frontend-react-app -f ./frontend-react-app/Dockerfile.dev ./frontend-react-app
 
 script:
   - docker run -e CI=true artemalieinikov/frontend-react-app npm run test
