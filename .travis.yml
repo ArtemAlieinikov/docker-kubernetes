@@ -1,0 +1,11 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - ./frontend-react-app docker -t artemalieinikov/frontend-react-app -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true artemalieinikov/frontend-react-app npm run test
